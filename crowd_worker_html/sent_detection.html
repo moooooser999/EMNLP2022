@@ -1,0 +1,92 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
+
+    <!-- The crowd-classifier element will create a tool for the Worker to select the
+           correct answer to your question -->
+    <crowd-classifier-multi-select 
+      name="sentences"
+      categories="['sentence-1', 'sentence-2', 'sentence-3', 'sentence-4', 'sentence-5']"
+      header="The following sentences are describing (part of) the Ground Truth text. Please selece the sentences (maybe more than one) that look irrelevant or contradictive i.e. telling something not mentioned in Ground Truth."
+      exclusion-category="{ text: 'None of the above' }"
+    >
+      <classification-target>
+        <p>
+            <strong>Ground Truth: </strong>
+
+            <!-- The first text you to compare will be substituted for the "text1" variable 
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text1}
+
+        </p>
+
+        <p>
+            <strong>Sentence 1: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable 
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text2}
+        </p>
+        </p>
+
+        <p>
+            <strong>Sentence 2: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable 
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text3}
+        </p>
+
+        <p>
+            <strong>Sentence 3: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable 
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text4}
+        </p>
+         <p>
+            <strong>Sentence 4: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable 
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text5}
+        </p>
+        <p>
+            <strong>Sentence 5: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable 
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text6}
+        </p>
+
+      </classification-target>
+
+     <!-- Use the short-instructions section for quick instructions that the Worker
+            will see while working on the task. Including some basic examples of 
+            good and bad answers here can help get good results. You can include 
+            any HTML here. -->
+      <short-instructions>
+          Which sentences wrongly describe the content of the Ground Truth? <br>
+          You can select more than one sentences. <br>
+          NOTE_1: Some of the text might be [blank]; please ignore the blank one and do not choose them!!
+          NOTE_2: We consider the meanning of the text more than the fluency and grammar, so if there is any minor grammatical error, you can ignore it.
+      </short-instructions>
+
+      <!-- Use the full-instructions section for more detailed instructions that the 
+            Worker can open while working on the task. Including more detailed 
+            instructions and additional examples of good and bad answers here can
+            help get good results. You can include any HTML here. -->
+      <full-instructions header="Semantic Similarity Instructions">
+        <h2>Which sentences wrongly describe the content of the Ground Truth?</h2>
+          You can select more than one sentences. <br>
+          NOTE_1: Some of the text might be [blank]; please ignore the blank one and do not choose them!!
+          NOTE_2: We consider the meanning of the text more than the fluency and grammar, so if there is any minor grammatical error, you can ignore it.
+      </full-instructions>
+
+    </crowd-classifier>
+</crowd-form>

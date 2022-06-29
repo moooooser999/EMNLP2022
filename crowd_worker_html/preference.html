@@ -1,0 +1,71 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
+
+    <!-- The crowd-classifier element will create a tool for the Worker to select the
+           correct answer to your question -->
+    <crowd-classifier
+      name="semantic-similarity"
+      categories="['Text 1','Text 2']"
+      header="Please select the better one (in terms of factual correctness and usefulness)"
+      
+    >
+      <classification-target>
+        <p>
+            <strong>Ground Truth: </strong>
+
+            <!-- The first text you to compare will be substituted for the "text1" variable
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text1}
+
+        </p>
+
+        <p>
+            <strong>Text 1: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text2}
+        </p>    
+        
+        <p>    
+            <strong>Text 2: </strong>
+
+            <!-- The second text you to compare will be substituted for the "text2" variable
+                   when you publish a batch with a CSV input file containing multiple text items  -->
+            ${text3}
+
+        </p>
+
+      </classification-target>
+
+     <!-- Use the short-instructions section for quick instructions that the Worker
+            will see while working on the task. Including some basic examples of
+            good and bad answers here can help get good results. You can include
+            any HTML here. -->
+
+      <short-instructions>
+
+       Which one of the text best describe the content of the Ground Truth text in regards of factuality? <br>
+
+       
+        </short-instructions>
+
+      <!-- Use the full-instructions section for more detailed instructions that the
+            Worker can open while working on the task. Including more detailed
+            instructions and additional examples of good and bad answers here can
+            help get good results. You can include any HTML here. -->
+
+      <full-instructions header="Semantic Similarity Instructions">
+        <h2>Which one of the text best describe the content of the Ground Truth text in regards of factuality?</h2>
+       
+          
+      </full-instructions>
+
+    </crowd-classifier>
+</crowd-form>
